@@ -1,65 +1,110 @@
 import React, { useState } from 'react';
-import AnimatedSection from './AnimatedSection';
-import { motion, AnimatePresence } from 'framer-motion';
-import { EXPERIENCE_DATA } from '../constants';
+import Section from './Section';
+import type { ExperienceItem } from '../types';
+
+const experienceData: ExperienceItem[] = [
+  {
+    company: 'Chipotle Mexican Grill',
+    role: 'Sr GRC Analyst',
+    period: '01/2023 - Present',
+    points: [
+      'Conduct thorough reviews and assessments of SOC controls.',
+      'Stay current on AICPA standards and incorporate changes into assessments.',
+      'Develop security awareness training and phishing campaigns.',
+      'Lead and coordinate audit-related tasks for PCI-DSS 4.0 readiness.',
+      'Lead the roadmap and transition from PCI-DSS 3.2.1 to PCI-DSS 4.0.',
+      'Monitor industry trends and best practices for PCI-DSS compliance.',
+      'Perform risk assessments and audits for PCI-DSS, SOX, and internal policies.',
+    ],
+  },
+  {
+    company: 'Columbia Bank',
+    role: 'IT Risk Manager-Third Party Vendor Risk Management',
+    period: '05/2020 - 12/2023',
+    points: [
+      'Conducted readiness assessments of service organization controls based on SOC 2.',
+      'Spearheaded vendor risk management and documentation.',
+      'Conducted comprehensive 3rd Party Vendor Risk Assessments.',
+      'Provided actionable recommendations for security exceptions and remediation.',
+      'Identified and addressed system vulnerabilities, focusing on vulnerability management and gap analysis.',
+      'Collaborated with cross-functional teams to navigate compliance issues (PCI, SOC2).',
+    ],
+  },
+  {
+    company: 'NETWORK CENTER INC',
+    role: 'Senior Security Assessor (IT Risk & Compliance)',
+    period: '05/2016 - 04/2020',
+    points: [
+      'Led comprehensive security and privacy control assessments for IT processes.',
+      'Drove vulnerability/risk assessment analyses to support A&A activities.',
+      'Orchestrated development of security solutions for weaknesses identified in RTM and SAR.',
+      'Conducted FedRAMP assessments by analyzing cloud provider controls.',
+      'Maintained comprehensive Security Authorization packages (SSP, CP, SAR).',
+      'Demonstrated proficiency in NIST 800-53 security controls and RMF.',
+    ],
+  },
+   {
+    company: 'OHIO HEALTH',
+    role: 'Third-Party Vendor Risk Manager',
+    period: '06/2013 - 05/2016',
+    points: [
+      'Provided analysis and recommendations for identified security exceptions.',
+      'Ensured all vendor relationships and contracts were documented and uploaded to the VRM system.',
+      'Performed 3rd Party Vendor Risk Assessments and assisted in reporting.',
+      'Managed the functionality of the VRM system, VCI\'s central repository for vendor contracts.',
+      'Worked with Legal, Compliance, and IRM to consider third-party risk.',
+      'Provided senior leadership with "Risk Based" vendor evaluation reporting.',
+    ],
+  },
+];
 
 const Experience: React.FC = () => {
-    const [selectedTab, setSelectedTab] = useState(0);
-    const experience = EXPERIENCE_DATA[selectedTab];
+    const [activeCompany, setActiveCompany] = useState(experienceData[0].company);
+    const activeExperience = experienceData.find(exp => exp.company === activeCompany);
 
     return (
-        <AnimatedSection id="experience">
-            <h2 className="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-8 flex items-center">
-                <span className="text-xl text-cyan-600 dark:text-cyan-400 font-mono mr-3">03.</span> Where I've Worked
-                <span className="flex-grow h-px bg-slate-300 dark:bg-slate-700 ml-4"></span>
-            </h2>
-
-            <div className="flex flex-col md:flex-row gap-8 min-h-[300px]">
-                {/* Tabs */}
-                <div className="flex md:flex-col overflow-x-auto md:overflow-x-visible border-b-2 md:border-b-0 md:border-l-2 border-slate-300 dark:border-slate-700">
-                    {EXPERIENCE_DATA.map((item, index) => (
+        <Section id="experience" title="Where I've Worked">
+            <div className="flex flex-col md:flex-row max-w-5xl mx-auto">
+                {/* Company Tabs */}
+                <div className="flex md:flex-col md:w-1/4 mb-8 md:mb-0 overflow-x-auto scrollbar-hide">
+                    {experienceData.map((exp) => (
                         <button
-                            key={item.company}
-                            onClick={() => setSelectedTab(index)}
-                            className={`relative text-left px-4 py-3 whitespace-nowrap font-medium text-sm transition-all duration-300 font-mono ${
-                                selectedTab === index ? 'text-cyan-600 dark:text-cyan-400 bg-slate-200 dark:bg-slate-800' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 hover:text-cyan-600 dark:hover:text-cyan-400'
+                            key={exp.company}
+                            onClick={() => setActiveCompany(exp.company)}
+                            className={`text-left px-4 py-3 whitespace-nowrap text-sm md:text-base border-b-2 md:border-b-0 md:border-l-2 transition-all duration-300 ${
+                                activeCompany === exp.company
+                                    ? 'border-sky-500 text-sky-500 bg-sky-500/10'
+                                    : 'border-gray-200 text-gray-500 hover:bg-gray-400/10 hover:text-sky-500'
                             }`}
                         >
-                            {item.company}
-                            {selectedTab === index && (
-                                <motion.div className="absolute bottom-[-2px] left-0 right-0 h-0.5 md:bottom-0 md:left-[-2px] md:top-0 md:w-0.5 md:h-full bg-cyan-600 dark:bg-cyan-400" layoutId="underline" />
-                            )}
+                            {exp.company}
                         </button>
                     ))}
                 </div>
 
-                {/* Content */}
-                <div className="flex-1 pt-2">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={selectedTab}
-                            initial={{ opacity: 0, x: 10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -10 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">
-                                {experience.role} <span className="text-cyan-600 dark:text-cyan-400">@ {experience.company}</span>
+                {/* Experience Details */}
+                <div className="md:w-3/4 md:pl-8">
+                    {activeExperience && (
+                        <div className="transition-opacity duration-500">
+                            <h3 className="text-2xl font-bold text-gray-900">
+                                {activeExperience.role} <span className="text-sky-500">@ {activeExperience.company}</span>
                             </h3>
-                            <p className="font-mono text-sm text-slate-500 dark:text-slate-400 mb-4">{experience.date}</p>
-                            <ul className="space-y-2">
-                                {experience.description.map((point, i) => (
-                                    <li key={i} className="flex items-start">
-                                        <span className="text-cyan-600 dark:text-cyan-400 mr-3 mt-1 text-xs">&#9654;</span>
-                                        <span className="text-slate-700 dark:text-slate-300">{point}</span>
+                            <p className="text-gray-500 font-mono text-sm mt-1 mb-6">{activeExperience.period}</p>
+                            <ul className="space-y-4">
+                                {activeExperience.points.map((point, index) => (
+                                    <li key={index} className="flex items-start">
+                                        <svg className="w-4 h-4 mr-3 mt-1 text-sky-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path>
+                                        </svg>
+                                        <span className="text-gray-700">{point}</span>
                                     </li>
                                 ))}
                             </ul>
-                        </motion.div>
-                    </AnimatePresence>
+                        </div>
+                    )}
                 </div>
             </div>
-        </AnimatedSection>
+        </Section>
     );
 };
 

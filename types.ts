@@ -1,30 +1,32 @@
-
-export interface ExperienceItem {
-    date: string;
-    role: string;
-    company: string;
-    description: string[];
+export interface Skill {
+  name: string;
 }
 
 export interface SkillCategory {
-    title: string;
-    skills: string[];
+  title: string;
+  skills: Skill[];
 }
 
-export interface ProjectItem {
-    title: string;
-    description: string;
-    tags: string[];
-    link?: string;
+export interface ExperienceItem {
+  company: string;
+  role: string;
+  period: string;
+  points: string[];
 }
 
 export interface EducationItem {
-    date: string;
-    degree: string;
-    institution: string;
+  institution: string;
+  degree: string;
+  period: string;
 }
 
 export interface CertificationItem {
-    title: string;
-    issuer: string;
+  name: string;
+  issuer: string;
+}
+
+export interface ProjectItem {
+  title: string;
+  description: string;
+  tags: string[];
 }
