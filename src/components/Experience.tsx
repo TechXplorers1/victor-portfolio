@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Section from './Section';
-import type { ExperienceItem } from '../types';
+import type { ExperienceItem } from '../../types'; // Check path
 
 const experienceData: ExperienceItem[] = [
   {
@@ -73,8 +73,8 @@ const Experience: React.FC = () => {
                             onClick={() => setActiveCompany(exp.company)}
                             className={`text-left px-4 py-3 whitespace-nowrap text-sm md:text-base border-b-2 md:border-b-0 md:border-l-2 transition-all duration-300 ${
                                 activeCompany === exp.company
-                                    ? 'border-sky-500 text-sky-500 bg-sky-500/10'
-                                    : 'border-gray-200 text-gray-500 hover:bg-gray-400/10 hover:text-sky-500'
+                                    ? 'border-sky-500 text-sky-500 bg-sky-500/10 dark:bg-sky-500/20'
+                                    : 'border-gray-200 dark:border-slate-700 text-gray-500 dark:text-gray-400 hover:bg-gray-400/10 hover:text-sky-500'
                             }`}
                         >
                             {exp.company}
@@ -86,17 +86,17 @@ const Experience: React.FC = () => {
                 <div className="md:w-3/4 md:pl-8">
                     {activeExperience && (
                         <div className="transition-opacity duration-500">
-                            <h3 className="text-2xl font-bold text-gray-900">
+                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
                                 {activeExperience.role} <span className="text-sky-500">@ {activeExperience.company}</span>
                             </h3>
-                            <p className="text-gray-500 font-mono text-sm mt-1 mb-6">{activeExperience.period}</p>
+                            <p className="text-gray-500 dark:text-gray-400 font-mono text-sm mt-1 mb-6">{activeExperience.period}</p>
                             <ul className="space-y-4">
                                 {activeExperience.points.map((point, index) => (
                                     <li key={index} className="flex items-start">
                                         <svg className="w-4 h-4 mr-3 mt-1 text-sky-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                             <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path>
                                         </svg>
-                                        <span className="text-gray-700">{point}</span>
+                                        <span className="text-gray-700 dark:text-gray-300">{point}</span>
                                     </li>
                                 ))}
                             </ul>

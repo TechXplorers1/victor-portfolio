@@ -1,6 +1,6 @@
 import React from 'react';
 import Section from './Section';
-import type { SkillCategory } from '../types';
+import type { SkillCategory } from '../../types'; // Check path to types
 
 const skillsData: SkillCategory[] = [
   {
@@ -43,14 +43,14 @@ const ShieldIcon = () => (
 
 const SkillCard: React.FC<{ category: SkillCategory, index: number }> = ({ category, index }) => {
     return (
-        <div className="bg-white/50 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-gray-200 hover:border-sky-500 transform hover:-translate-y-2 transition-all duration-300" style={{ transitionDelay: `${index * 100}ms` }}>
+        <div className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-gray-200 dark:border-slate-700 hover:border-sky-500 transform hover:-translate-y-2 transition-all duration-300" style={{ transitionDelay: `${index * 100}ms` }}>
             <div className="flex justify-center">
                 <ShieldIcon />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 text-center mb-6">{category.title}</h3>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white text-center mb-6">{category.title}</h3>
             <ul className="flex flex-wrap justify-center gap-3">
                 {category.skills.map((skill) => (
-                    <li key={skill.name} className="bg-sky-100 text-sky-800 text-sm font-medium px-4 py-2 rounded-full">
+                    <li key={skill.name} className="bg-sky-100 dark:bg-sky-900/30 text-sky-800 dark:text-sky-200 text-sm font-medium px-4 py-2 rounded-full">
                         {skill.name}
                     </li>
                 ))}

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useOnScreen } from '../hooks/useOnScreen';
+import { useOnScreen } from '../hooks/useOnScreen'; // Ensure path is correct based on your structure
 
 interface SectionProps {
   id: string;
@@ -17,7 +17,8 @@ const Section: React.FC<SectionProps> = ({ id, title, children }) => {
       ref={ref}
       className={`py-20 md:py-28 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
-      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-gray-900">
+      {/* Updated text-gray-900 to dark:text-white */}
+      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-gray-900 dark:text-white">
         <span className="bg-gradient-to-r from-sky-500 to-indigo-600 bg-clip-text text-transparent">
           {title}
         </span>

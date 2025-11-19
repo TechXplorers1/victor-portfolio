@@ -1,6 +1,6 @@
 import React from 'react';
 import Section from './Section';
-import type { ProjectItem } from '../types';
+import type { ProjectItem } from '../../types'; // Check path
 
 const projectData: ProjectItem[] = [
   {
@@ -21,14 +21,14 @@ const projectData: ProjectItem[] = [
 ];
 
 const ProjectCard: React.FC<{ project: ProjectItem }> = ({ project }) => (
-    <div className="bg-white/50 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-gray-200 hover:border-sky-500 transform hover:-translate-y-2 transition-all duration-300 flex flex-col h-full">
+    <div className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-gray-200 dark:border-slate-700 hover:border-sky-500 transform hover:-translate-y-2 transition-all duration-300 flex flex-col h-full">
         <div className="flex-grow">
-            <h3 className="text-xl font-bold text-gray-900 mb-3">{project.title}</h3>
-            <p className="text-gray-600 mb-4 text-sm">{project.description}</p>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{project.title}</h3>
+            <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm">{project.description}</p>
         </div>
         <div className="flex flex-wrap gap-2 mt-auto pt-4">
             {project.tags.map(tag => (
-                <span key={tag} className="bg-sky-100 text-sky-800 text-xs font-medium px-2.5 py-1 rounded-full">{tag}</span>
+                <span key={tag} className="bg-sky-100 dark:bg-sky-900/30 text-sky-800 dark:text-sky-200 text-xs font-medium px-2.5 py-1 rounded-full">{tag}</span>
             ))}
         </div>
     </div>
